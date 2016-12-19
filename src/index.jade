@@ -1,0 +1,458 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        title REACT - FIRST CONTACT (A HANDS ON TUTORIAL)
+
+        meta(name="description" content="A tutorial for people which would like to start using react but they don't know how to start")
+        meta(name="author" content="Fran Nunez")
+
+        meta(name="apple-mobile-web-app-capable" content="yes")
+        meta(name="apple-mobile-web-app-status-bar-style" content="black-translucent")
+
+        meta(name="viewport" content="width=device-width,"
+        + "initial-scale=1.0,"
+        + "maximum-scale=1.0,"
+        + "user-scalable=no")
+
+        link(rel="stylesheet" href="main.css")
+
+    body
+        .reveal
+            // Any section element inside of this container is displayed as a slide
+            .slides
+                section
+                    h1 REACT FIRST CONTACT
+                    div
+                        img(class="react-logo" src="images/reactjs.png")
+                section
+                    section
+                        h1 WHY REACT?
+                    section
+                        h2 Library not framework
+                        ul
+                            li Easy Replaceable
+                            li Smaller Footprint (Compared to frameworks)
+                            li Focused on the Views
+                    section
+                        h2 Component Based
+                        ul
+                            li Reusable
+                            li Readable
+                            li No Context = Isolated = Independence
+                            li Extensibles
+                    section
+                        h2 Server Side Rendering
+                        ul
+                            li SEO Friendly
+                            li Fast First Rendered
+                    section
+                        h2 Reactive
+                        ul
+                            li State based
+                            li Reacts to the data
+                            li We can decide when to update
+                section
+                    section
+                        h1 React JSX
+                    section
+                        h2 Creating an element in React</h2>
+                        pre
+                            code(class="language-jsx").
+                                const element = React.createElement(
+                                    'h1',
+                                    {className: 'greetings'},
+                                    'Hello, world!'
+                                );
+                    section
+                        h2 Creating an element in JSX
+                        pre
+                            code(class="language-jsx").
+                                const element = (
+                                    #{'<h1 className="greetings">'}
+                                    Hello, world!
+                                    #{'</h1>'}
+                                );
+                    section
+                        h2 SAME THING
+                        pre
+                            code(class="language-jsx").
+                                const element = (
+                                    #{'<h1 className="greetings">'}
+                                    Hello, world!
+                                    #{'</h1>'}
+                                );
+                        div Babel compiles to...
+                        pre
+                            code(class="language-jsx").
+                                const element = React.createElement(
+                                    'h1',
+                                    {className: 'greetings'},
+                                    'Hello, world!'
+                                );
+                    section
+                        h2 Using Javascript inside JSX
+                        pre
+                            code(class="language-jsx").
+                                const user = {
+                                    firstName: 'Naruto',
+                                    lastName: 'Uzumaki'
+                                };
+                    section
+                        h2 Using Javascript inside JSX
+                        pre
+                            code(class="language-jsx").
+                                const greetings = (
+                                    #{'<div>'}
+                                        Welcome, {user.firstName + ' ' + user.lastName}!
+                                    #{'</div>'}
+                                );
+
+                                ReactDOM.render(
+                                    greetings,
+                                    document.getElementById('root')
+                                );
+                    section
+                        h2 Using Javascript inside JSX 2
+                        pre
+                            code(class="language-jsx").
+                                function formatName(user) {
+                                    return user.firstName + ' ' + user.lastName;
+                                }
+
+                                const user = {
+                                    firstName: 'Naruto',
+                                    lastName: 'Uzumaki'
+                                };
+
+                                const greetings = (
+                                    #{'<div>'}
+                                        Welcome, {formatName(user)}!
+                                    #{'</div>'}
+                                );
+
+                                ReactDOM.render(
+                                    greetings,
+                                    document.getElementById('root')
+                                );
+                        a(href="http://codepen.io/franuk/pen/ENGByB?editors=0010#0") CodePen
+                    section
+                        h2 Using JSX inside JS
+                        pre
+                            code(class="language-jsx").
+                                function welcomeMessage(user) {
+                                    if (user) {
+                                        return <h1>Welcome to Rakuten, {formatName(user)}!</h1>;
+                                    }
+                                    return #{'<h1>Welcome to Rakuten. Don\'t you want to <a href="#">Sign up?</a></h1>'};
+                                }
+                                ReactDOM.render(
+                                    welcomeMessage(),
+                                    document.getElementById('root')
+                                );
+                        a(href="http://codepen.io/franuk/pen/rWoExR/?editors=0010#0") CodePen
+                    section
+                        h2 JSX and Children
+                        pre
+                            code(class="language-jsx").
+                                #{'const element = <img src={user.avatarUrl} />'};
+                        pre
+                            code(class="language-jsx").
+                                const element = (
+                                  #{'<div>'}
+                                    #{'<h1>Hi!</h1>'}
+                                    #{'<h2>How are you?</h2>'}
+                                  #{'</div>'}
+                                );
+                        h2 What about?
+                        pre
+                            code(class="language-jsx").
+                                #{'const element = ('}
+                                    #{'<h1>Hi!</h1>'}
+                                    #{'<h2>How are you?</h2>'}
+                                #{');'}
+                    section
+                        h1(class="error") WRONG
+                        h2(class="highlight") JSX objects always need to be wrapped!
+                    section
+                        h2 JSX and Attributes
+                        pre
+                            code(class="language-jsx").
+                                #{'const element = <img src={user.avatarUrl} />'};
+                        pre
+                            code(class="language-jsx").
+                                const element = (
+                                  #{'<div>'}
+                                    #{'<h1>Hi!</h1>'}
+                                    #{'<h2>How are you?</h2>'}
+                                  #{'</div>'}
+                                );
+                    section
+                        h2 JSX Summary
+                        ul
+                            li JSX IS NOT HTML!!!
+                            li JSX represents objects
+                            li JSX compiles to React (using Babel)
+                section
+                    section
+                        h1 Our first component
+                    section
+                        ol
+                            li
+                                a(href="codepen.io") Open Codepen.io
+                            li Go to Settings - JS
+                            li Postprocessor: BABEL
+                            li Add React
+                            li Add ReactDOM
+                            li Save
+                            li Add an HTML root DIV
+                            li Minimize CSS & HTML VIEWS
+                    section
+                        h2 Defining a new Component
+                        pre
+                            code(class="language-jsx").
+                                class Item extends React.Component {
+                                    render() {
+                                        #{'return <div>Nintendo Switch</div>;'}
+                                    }
+                                }
+                                ReactDOM.render(
+                                    #{'<Item/>,'}
+                                    document.getElementById('root')
+                                );
+                        div Component names starts with CAPITAL letter
+                    section
+                        h2 Passing the props
+                        pre
+                            code(class="language-jsx").
+                                class Item extends React.Component {
+                                    render() {
+                                        #{'return <div>{this.props.name}</div>;'}
+                                    }
+                                }
+                                ReactDOM.render(
+                                    #{'<Item name="Nintendo Switch"/>,'}
+                                    document.getElementById('root')
+                                );
+                    section
+                        h2 Typechecking the props
+                        pre
+                            code(class="language-jsx").
+                                Item.propTypes = {
+                                  name: React.PropTypes.string.isRequired
+                                };
+                        div Props are only checked in Development mode
+                        div Other types number, object, func, element...
+                        div You can define your custom validator
+                        a(href="https://facebook.github.io/react/docs/typechecking-with-proptypes.html") More information
+                    section
+                        h2 Components made of components
+                        pre
+                            code(class="language-jsx").
+                                class ItemList extends React.Component {
+                                    render() {
+                                        #{'return <div>'}
+                                          #{'<Item name="Nintendo Switch" key="1"/>'}
+                                          #{'<Item name="Sony PS4 PRO" key="2"/>'}
+                                          #{'<Item name="Zelda : Breath of the Wild" key="3"/>'}
+                                        #{'</div>;'}
+                                    }
+                                }
+                    section
+                        h2 Beautifying our code
+                        pre
+                            code(class="language-jsx").
+                                class ItemList extends React.Component {
+                                    render() {
+                                        let items = [
+                                          #{'<Item name="Nintendo Switch" key="1"/>,'}
+                                          #{'<Item name="Sony PS4 PRO" key="2"/>,'}
+                                          #{'<Item name="Zelda : Breath of the Wild" key="3"/>'}
+                                        ];
+
+                                        #{'return <div>{items}</div>;'}
+                                    }
+                                }
+                    section
+                        h2 Using our knowledge
+                        pre
+                            code(class="language-jsx").
+                                let ITEMSOBJECT = [{
+                                  price: '¥30,000',
+                                  name: 'Nintendo Switch'
+                                }, {
+                                  price: '¥8,000',
+                                  name: 'Zelda : Breath of the Wild '
+                                }, {
+                                  price: '¥50,000',
+                                  name: 'Sony PS4 PRO'
+                                }];
+
+                                class Item extends React.Component {
+                                  render() {
+                                    #{'return <li>{this.props.item.name} - {this.props.item.price}</li>;'}
+                                  }
+                                }
+
+                                Item.propTypes = {
+                                    item: React.PropTypes.object
+                                }
+
+                                ReactDOM.render(
+                                    #{'<ItemList items={ITEMSOBJECT} />,'}
+                                    document.getElementById('root')
+                                );
+                        div ItemList Component???
+                    section
+                        h2 ItemList Component
+                        pre
+                            code(class="language-jsx").
+                                class ItemList extends React.Component {
+                                    render() {
+                                        let items = [];
+                                        this.props.items.forEach((itemObj) => {
+                                          #{'tems.push(<Item item={itemObj} key="itemObj.name"/>);'}
+                                        })
+                                        #{'return <ul>{items}</ul>;'}
+                                    }
+                                }
+                section
+                    section
+                        h1 Filtering Our Item List
+                    section
+                        h2 States
+                        ul
+                            li Plain JS object
+                            li State changes triggers render updates
+                            li The state starts with a default value when a Component mounts and then suffers from mutations in time (mostly generated from user events) therefore...
+                            li ...Only can be modified by the component, can't be modified by parent/children components.
+                            li  Don't modify states directly
+                                pre
+                                    code(class="language-jsx").
+                                        this.setState({comment: 'Hello'});
+                    section
+                        h2 States VS Props
+                        ul
+                            li
+                                strong Plain JS object
+                            li
+                                strong Props changes triggers render updates
+                            li Props (short for properties) are a Component's configuration or options.
+                            li Can't be modified within the component but Can be modified by parent/children components.
+                    section
+                        h2 Adding a SearchBar
+                        pre
+                            code(class="language-jsx").
+                                class SearchBar extends React.Component {
+                                  render() {
+                                    return (
+                                      #{'<form>'}
+                                         #{'<input type="text" placeholder="Search..."/>'}
+                                      #{'</form>'}
+                                    );
+                                  }
+                                }
+                    section
+                        h2 Creating a new Filterable Item List
+                        pre
+                            code(class="language-jsx").
+                                class FilterableItemList extends React.Component {
+                                  render() {
+                                    #{'return <div>'}
+                                      #{'<SearchBar />'}
+                                      #{'<ItemList items={this.props.items} />'}
+                                    #{'</div>;'}
+                                  }
+                                }
+                    section
+                        h2 Identify where we need to use a STATE
+                        ul
+                            li Identify components changing depending on that state
+                            li Find a common owner component
+                            li Either the common owner or another component higher up in the hierarchy should own the state.
+                            li If you can't find a component where it makes sense to own the state, create a new component simply for holding the state.
+                        div Let's use this logic with our component!
+                    section
+                        h2 Let's go!
+                        ul
+                            li ItemList needs to render the elements depending on the state
+                            li SearchBar needs to display the filtered test
+                            li FilterableItemList is the parent of both components
+                        h2 BINGO!
+                    section
+                        h2 Adding a initial state to FilterableItemList
+                        pre
+                            code(class="language-jsx").
+                                class FilterableItemList extends React.Component {
+                                    constructor(props) {
+                                        super(props);
+                                        this.state = {
+                                          filterText: ''
+                                        };
+
+                                        this.handleUserInput = this.handleUserInput.bind(this);
+                                    }
+                                ...
+                    section
+                        h2 Managing the state change
+                        pre
+                            code(class="language-jsx").
+                                ...
+                                handleUserInput(filterText) {
+                                    this.setState({
+                                      filterText: filterText
+                                    });
+                                  }
+                                ...
+                    section
+                        h2 Passing the state/handlers to the components
+                        pre
+                            code(class="language-jsx").
+                                render() {
+                                    #{'return <div>'}
+                                      #{'<SearchBar'}
+                                        filterText={this.state.filterText}
+                                        onUserInput={this.handleUserInput}
+                                      #{'/>'}
+                                      #{'<ItemList'}
+                                        items={this.props.items}
+                                        filterText={this.state.filterText}
+                                      #{'/>'}
+                                    #{'</div>;'}
+                                }
+                    section
+                        h2 Updating SearchBar Component
+                        pre
+                            code(class="language-jsx").
+                                constructor(props) {
+                                    super(props);
+                                    this.handleChange = this.handleChange.bind(this);
+                                  }
+
+                                  handleChange() {
+                                    this.props.onUserInput(
+                                      this.filterTextInput.value
+                                    );
+                                  }
+                        pre
+                            code(class="language-jsx").
+                                #{'<input'}
+                                    type="text" placeholder="Search..."
+                                    ref={(input) => this.filterTextInput = input}
+                                    value={this.props.filterText}
+                                    onChange={this.handleChange}
+                                 #{'/>'}
+                    section
+                        h2 Updating ItemList component
+                        pre
+                            code(class="language-jsx").
+                                this.props.items.forEach((itemObj) => {
+                                  if (itemObj.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) === -1) {
+                                    return;
+                                  }
+                                  #{'items.push(<Item item={itemObj} key={itemObj.name}/>);'}
+                                })
+                section
+                    h1 THANK YOU!
+                    h2 BY Fran Nunez
+        script(src="/react-hands-on.min.js")
